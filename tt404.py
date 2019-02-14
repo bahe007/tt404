@@ -212,7 +212,7 @@ class Crawler:
                 writer.writerow(broken_site)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Finds faulty links on your website. More information at: https://github.com/bahe007")
+    parser = argparse.ArgumentParser(description="Finds faulty links on your website. Learn more at: https://github.com/bahe007/tt404")
     parser.add_argument('base_url', type=str,
                         help='The base url where the crawler should start')
     parser.add_argument('--output_csv', type=str, default="tt404_analysis.csv")

@@ -1,6 +1,6 @@
 # tt404
 ## Abstract
-tt404 is supposed to find faulty links on a website by crawling through it. It's able to write the results into a csv-file, to make the results easy to use and analyse. 
+tt404 is supposed to find faulty links on a website by crawling through it. It's able to write the results into a csv-file, to make the findings easy to use and analyse. 
 ## Project Motivation
 Most websites don't have a strict hierarchical navigation, instead there are links to other pages or even other websites within the article texts. This is especially critical, because it makes updating a website so difficult: If pages are moved to different urls, it can be quite hard to keep up with all the 404 errors. 
 
@@ -37,7 +37,7 @@ Origin, Label, Link, Status
 https://example.com/origin, Button-Label, Referred URL, Returned Status Code
 ```
 
-If there are chilf HTML tags in the ```<a>```-Tag, the "Label"-field for the specific link will be empty, otherwise it will display what the button says to help identify the error more easily. 
+If there are child HTML tags in the ```<a>```-Tag, the "Label"-field for the specific link will be empty, otherwise it will display what the button says to help identify the error more easily. 
 
 ### Features
 tt404 can ignore certain parts (e. g. footer or navigation) of all pages visited except on the base URL in order to prevent recognizing the same mistake on every page. To allow this, provide the ```class``` or ```id``` tag. 
@@ -53,6 +53,7 @@ Last but not least, you can provide certain URLs that shouldn't be visited at al
 - Beautiful Soup
 - requests
 - argparse
+- time
 - csv (which I may remove and use an own csv-implementation based on the basic ```open()``` command)
 
 # License
