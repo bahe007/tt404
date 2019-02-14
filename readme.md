@@ -1,13 +1,13 @@
 # tt404
 ## Abstract
-tt404 is supposed to find faulty links on a website by crawling through it. It's able to write the results into a csv-file, to make the findings easy to use and analyse. 
+tt404 is supposed to find broken links on a website by crawling through it. It's able to write the results into a csv-file, to make the findings easy to use and analyse. 
 ## Project Motivation
 Most websites don't have a strict hierarchical navigation, instead there are links to other pages or even other websites within the article texts. This is especially critical, because it makes updating a website so difficult: If pages are moved to different urls, it can be quite hard to keep up with all the 404 errors. 
 
 Links to websites maintained by other companies are even worse: These websites can be deleted, altered or whatsoever, without letting the websites that link to them know. 
 
 ## How It Works
-Like stated at the beginning, tt404 is a simple web crawler crawling through a given website. To start it, you give a base URL where it should begin. It searches for all links on that page and visits the referred pages. If the status code is not 200, it saves the link as faulty. If the referred website isn't the same top level domain as of the base URL, it just checks the directly linked site. If the referred website is the same top level domain, it visits all links on that page, too. 
+Like stated at the beginning, tt404 is a simple web crawler crawling through a given website. To start it, you give a base URL where it should begin. It searches for all links on that page and visits the referred pages. If the status code is not 200, it saves the link as broken. If the referred website isn't the same top level domain as of the base URL, it just checks the directly linked site. If the referred website is the same top level domain, it visits all links on that page, too. 
 
 If it has visited all sites it could find, it saves the results into a csv file. 
 
