@@ -25,7 +25,7 @@ class Crawler:
         self.ids_to_ignore = ignore_ids
 
         self.broken_sites = list() # List Entry Format: (origin, label, target, status)
-        self.already_visited = list() # simple string list with all sites that are alreay visited and returned status code 200
+        self.already_visited = set() # simple set with all sites that are alreay visited and returned status code 200
         self.todo = list() # List Entry Format: (origin, label, target)
 
     def crawl(self):
@@ -42,14 +42,14 @@ class Crawler:
             if self.is_url_broken(target_url): # target is a known faulty page
                 self.broken_sites.append((origin, label, target_url, self.broken_url_status_code(target_url)))
                 continue
-            elif self.is_url_already_visited(target_url) or self.should_url_be_ignored(target_url): # target is already visited or should be ignored anyways
+            elif target_url in self.already_visited or self.should_url_be_ignored(target_url): # target is already visited or should be ignored anyways
                 continue
             else: # Seite wurde noch nicht besucht
                 content, status_code = self.visit(target_url)
                 if status_code != 200:
                     self.broken_sites.append((origin, label, target_url, status_code))
                 else:
-                    self.already_visited.append(target_url)
+                    self.already_visited.add(target_url)
                     if self.is_link_to_tld(target_url):
                         is_start_page = False 
                         if target_url == self.base_url: 
@@ -174,17 +174,6 @@ class Crawler:
                 return element[3]
         return -1
 
-    def is_url_already_visited(self, url: str):
-        """
-        Determines, if the urls has already been visited. 
-        :param url:
-        :return: Boolean
-        """
-        if url in self.already_visited:
-            return True
-        else:
-            return False
-
     def should_url_be_ignored(self, url: str): 
         """
         Determines, wether a given url is one of the urls that should be ignored
@@ -233,3 +222,5 @@ if __name__ == "__main__":
     crawler = Crawler(base_url, output_file=output_csv, ignore_urls=ignore_urls, ignore_classes=ignore_classes, ignore_ids=ignore_ids, politeness=politeness)
     crawler.crawl()
     crawler.safe_as_csv()
+
+    print("Found {} links to broken sites.".format(len(crawler.broken_sites)))
